@@ -1,5 +1,5 @@
 #!/bin/bash
-dotnet publish -c Release OsayamiBlog.csproj
+dotnet publish -c Release SudaTales.csproj
 rm -rf docs
 mkdir docs
 cp -r bin/Release/net10.0/publish/wwwroot/* docs/

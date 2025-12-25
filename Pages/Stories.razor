@@ -1,0 +1,29 @@
+@page "/stories"
+
+@using SudaTales.Data
+@using global::SudaTales.Data
+
+<h1>Stories</h1>
+
+@if (!StoryRepository.All.Any())
+{
+    <p>No stories yet.</p>
+}
+else
+{
+    <ul>
+        @foreach (var story in StoryRepository.All)
+        {
+            <li>
+                <a href="/stories/@story.Slug">
+                    <strong>@story.Title</strong>
+                </a>
+
+                @if (!string.IsNullOrWhiteSpace(story.Summary))
+                {
+                    <p>@story.Summary</p>
+                }
+            </li>
+        }
+    </ul>
+}

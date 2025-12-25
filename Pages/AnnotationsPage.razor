@@ -1,5 +1,5 @@
 @page "/annotations"
-@using OsayamiBlog.Services
+@using SudaTales.Services
 
 @inject AnnotationRegistry Registry
 @inject NavigationManager Nav
@@ -36,8 +36,9 @@ else
     private void GoTo(string annotationId)
     {
         Nav.NavigateTo(
-            $"/blog/{Registry.Get(annotationId)!.Location.PostSlug}" +
-            $"?annotation={annotationId}"
-        );
+    $"/stories/{Registry.Get(annotationId)!.Location.PostSlug}" +
+    $"?annotation={annotationId}"
+);
+
     }
 }

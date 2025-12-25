@@ -1,4 +1,4 @@
-namespace OsayamiBlog.Models;
+namespace SudaTales.Models;
 
 public sealed class AnnotationDraft
 {

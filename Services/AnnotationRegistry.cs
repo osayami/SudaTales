@@ -1,6 +1,6 @@
-using OsayamiBlog.Models;
+using SudaTales.Models;
 
-namespace OsayamiBlog.Services;
+namespace SudaTales.Services;
 
 public sealed class AnnotationRegistry
 {

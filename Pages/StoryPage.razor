@@ -1,0 +1,34 @@
+@page "/stories/{Slug}"
+
+@using SudaTales.Models
+@using SudaTales.Data
+
+@if (_story is null)
+{
+    <p>Story not found.</p>
+}
+else
+{
+    <article>
+        <h1>@_story.Title</h1>
+
+        @foreach (var paragraph in _story.Paragraphs)
+        {
+            <AnnotatableParagraph
+                Paragraph="paragraph"
+                CurrentPostSlug="@_story.Slug" />
+        }
+    </article>
+}
+
+@code {
+    [Parameter]
+    public string Slug { get; set; } = string.Empty;
+
+    private StoryModel? _story;
+
+    protected override void OnParametersSet()
+    {
+        _story = StoryRepository.Get(Slug);
+    }
+}
