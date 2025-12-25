@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SK8fvA0oWwc=",
+  "dgSpecHash": "LDWeXYGN/k4=",
   "success": true,
   "projectFilePath": "/home/osayami/Documents/GitHub/SudaTales/SudaTales.csproj",
   "expectedPackageFiles": [
@@ -13,7 +13,6 @@
     "/home/osayami/.nuget/packages/microsoft.aspnetcore.components.webassembly/10.0.1/microsoft.aspnetcore.components.webassembly.10.0.1.nupkg.sha512",
     "/home/osayami/.nuget/packages/microsoft.aspnetcore.components.webassembly.devserver/10.0.1/microsoft.aspnetcore.components.webassembly.devserver.10.0.1.nupkg.sha512",
     "/home/osayami/.nuget/packages/microsoft.aspnetcore.metadata/10.0.1/microsoft.aspnetcore.metadata.10.0.1.nupkg.sha512",
-    "/home/osayami/.nuget/packages/microsoft.dotnet.hotreload.webassembly.browser/10.0.101/microsoft.dotnet.hotreload.webassembly.browser.10.0.101.nupkg.sha512",
     "/home/osayami/.nuget/packages/microsoft.extensions.configuration/10.0.1/microsoft.extensions.configuration.10.0.1.nupkg.sha512",
     "/home/osayami/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.1/microsoft.extensions.configuration.abstractions.10.0.1.nupkg.sha512",
     "/home/osayami/.nuget/packages/microsoft.extensions.configuration.binder/10.0.1/microsoft.extensions.configuration.binder.10.0.1.nupkg.sha512",

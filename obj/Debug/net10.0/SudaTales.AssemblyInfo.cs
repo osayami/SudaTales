@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SudaTales")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3e666e5bcaebd05839b73f331aa03aedfce2e64")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b8892985219b3baa79b8fbc5140ac79bfdda05d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SudaTales")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SudaTales")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
