@@ -1,0 +1,43 @@
+@page "/annotations"
+@using OsayamiBlog.Services
+
+@inject AnnotationRegistry Registry
+@inject NavigationManager Nav
+
+<h1>Annotations</h1>
+
+@if (!Registry.All.Any())
+{
+    <p>No annotations yet.</p>
+}
+else
+{
+    <ul class="annotation-list">
+        @foreach (var entry in Registry.All)
+        {
+            <li class="annotation-item">
+                <strong>@entry.Annotation.Label</strong>
+                <p>@entry.Annotation.Body</p>
+
+                <small>
+                    Post: @entry.Location.PostSlug
+                </small>
+
+                <div>
+                    <button @onclick="() => GoTo(entry.Id)">
+                        View in context
+                    </button>
+                </div>
+            </li>
+        }
+    </ul>
+}
+@code {
+    private void GoTo(string annotationId)
+    {
+        Nav.NavigateTo(
+            $"/blog/{Registry.Get(annotationId)!.Location.PostSlug}" +
+            $"?annotation={annotationId}"
+        );
+    }
+}

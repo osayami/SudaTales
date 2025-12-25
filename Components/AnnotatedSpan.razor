@@ -1,0 +1,24 @@
+<span class="annotated"
+      @onmouseenter="() => _show = true"
+      @onmouseleave="() => _show = false">
+
+    @ChildContent
+
+    @if (_show)
+    {
+        <span class="annotation-popup">
+            <strong>@Annotation.Label</strong>
+            <div>@Annotation.Body</div>
+        </span>
+    }
+</span>
+
+@code {
+    [Parameter, EditorRequired]
+    public Annotation Annotation { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    private bool _show;
+}

@@ -1,0 +1,43 @@
+<div class="annotation-dialog-backdrop">
+    <div class="annotation-dialog">
+        <h3>Create annotation</h3>
+
+        <div class="field">
+            <label>Label</label>
+            <input @bind="_draft.Label" />
+        </div>
+
+        <div class="field">
+            <label>Body</label>
+            <textarea @bind="_draft.Body"></textarea>
+        </div>
+
+        <div class="actions">
+            <button @onclick="Confirm">Save</button>
+            <button @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public EventCallback<AnnotationDraft> OnConfirm { get; set; }
+
+    [Parameter, EditorRequired]
+    public EventCallback OnCancel { get; set; }
+
+    private readonly AnnotationDraft _draft = new();
+    
+    private async Task Confirm()
+    {
+        if (string.IsNullOrWhiteSpace(_draft.Body))
+            return;
+
+        await OnConfirm.InvokeAsync(_draft);
+    }
+
+    private async Task Cancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+}

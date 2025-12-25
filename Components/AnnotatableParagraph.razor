@@ -1,0 +1,88 @@
+@using OsayamiBlog.Services
+@inject AnnotationRegistry Registry
+
+<div @onmouseup="CaptureSelection">
+    <ParagraphRenderer Paragraph="Paragraph" />
+</div>
+
+@if (_selection is not null)
+{
+    @if (_selection is not null)
+{
+    <button @onclick="OpenDialog">Annotate</button>
+}
+
+@if (_showDialog)
+{
+    <CreateAnnotationDialog
+        OnConfirm="CreateAnnotation"
+        OnCancel="CloseDialog" />
+}
+
+}
+
+@code {
+    private bool _showDialog;
+private AnnotationDraft? _pendingDraft;
+
+    [Parameter, EditorRequired]
+public string CurrentPostSlug { get; set; } = "";
+
+    [Inject] IJSRuntime JS { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public Paragraph Paragraph { get; set; } = default!;
+
+    private TextSelection? _selection;
+
+    private async Task CaptureSelection()
+    {
+        _selection = await JS.InvokeAsync<TextSelection?>("getSelectionText");
+    }
+
+  private void CreateAnnotation(AnnotationDraft draft)
+{
+    if (_selection is null) return;
+
+    var annotation = new Annotation
+    {
+        Label = draft.Label,
+        Body = draft.Body
+    };
+
+    var location = new AnnotationLocation
+    {
+        PostSlug = CurrentPostSlug,
+        ParagraphId = Paragraph.Id,
+        Start = _selection.StartOffset,
+        Length = _selection.EndOffset - _selection.StartOffset
+    };
+
+    Registry.Register(annotation, location);
+
+    var id = Registry.All.Last().Id;
+
+    Paragraph.Annotations.Add(new InlineAnnotation
+    {
+        AnnotationId = id,
+        Start = location.Start,
+        Length = location.Length
+    });
+
+    _showDialog = false;
+    _selection = null;
+}
+
+
+private void OpenDialog()
+{
+    _showDialog = true;
+}
+
+private void CloseDialog()
+{
+    _showDialog = false;
+    _selection = null;
+}
+
+}

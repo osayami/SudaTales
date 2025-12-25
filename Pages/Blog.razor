@@ -1,0 +1,12 @@
+@page "/blog"
+
+<h1>Blog</h1>
+
+<ul>
+@foreach (var post in BlogPosts.All)
+{
+    <li>
+        <a href="/blog/@post.Slug">@post.Title</a>
+    </li>
+}
+</ul>

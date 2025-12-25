@@ -1,0 +1,30 @@
+@page "/blog/{Slug}"
+
+@if (_post is null)
+{
+    <p>Post not found.</p>
+}
+else
+{
+    <article>
+        <h1>@_post.Title</h1>
+
+        @foreach (var p in _post.Paragraphs)
+        {
+            <AnnotatableParagraph
+    Paragraph="p"
+    CurrentPostSlug="@_post!.Slug" />
+
+        }
+    </article>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; } = "";
+
+
+    private BlogPost? _post;
+
+    protected override void OnParametersSet()
+        => _post = BlogPosts.Get(Slug);
+}
