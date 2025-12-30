@@ -1,0 +1,5 @@
+title: Peacock Island
+slug: peacock-island
+author: Osayami
+language: ar
+summary: A fable about isolation, fear, and witness.

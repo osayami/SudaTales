@@ -168,3 +168,168 @@ code {
     margin-bottom: 0.75rem;
     border-radius: 4px;
 }
+/* App shell */
+.app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Top navigation */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* Nav links */
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-links a.active {
+    text-decoration: underline;
+}
+
+/* Body area below nav */
+.body-area {
+    display: flex;
+    flex: 1;
+    margin-top: 56px; /* same as nav height */
+}
+
+/* Sidebar (empty for now) */
+.sidebar {
+    width: 240px;
+    border-right: 1px solid #ddd;
+    padding: 1rem;
+}
+
+/* Main content */
+.content {
+    flex: 1;
+    padding: 1rem;
+    overflow-x: hidden;
+}
+.story-shell {
+    display: flex;
+    gap: 1rem;
+}
+
+.story-sidebar {
+    width: 260px;
+    border-right: 1px solid #ddd;
+    padding: 0.75rem;
+}
+
+.story-content {
+    flex: 1;
+    max-width: 700px;
+}
+.chapter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chapter-button {
+    width: 100%;
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.chapter-button:hover {
+    background: #f0f0f0;
+}
+
+.chapter-button.active {
+    font-weight: bold;
+    background: #e8e8e8;
+}
+.story-shell {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr) 260px;
+    gap: 1rem;
+}
+
+.story-sidebar {
+    padding: 0.75rem;
+}
+
+.story-sidebar.left {
+    border-right: 1px solid #ddd;
+}
+
+.story-sidebar.right {
+    border-left: 1px solid #ddd;
+}
+
+.chapter-annotations .annotation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chapter-annotations li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.muted {
+    color: #777;
+}
+.annotatable-paragraph {
+    cursor: pointer;
+    padding: 0.25rem 0.15rem;
+}
+
+.annotatable-paragraph.selected {
+    background-color: #fff3c4; /* soft highlight */
+    outline: 1px solid #f0d26a;
+}
+.annotatable-paragraph:hover {
+    background-color: #fff8dc; /* lighter highlight on hover */
+}
+
+
+.stories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.story-card h2 {
+    margin-bottom: 0.25rem;
+}
+
+.story-meta {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.summary {
+    margin-top: 0.5rem;
+    max-width: 60ch;
+}
+.read-button {
+    margin-top: 0.75rem;
+}

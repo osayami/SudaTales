@@ -1,0 +1,99 @@
+@using SudaTales.Services
+@using SudaTales.Models
+
+@inject AnnotationRegistry Registry
+
+<div class="chapter-annotations">
+    <h3>Annotations</h3>
+
+    @if (_annotations.Count == 0)
+    {
+        <p class="muted">No annotations yet.</p>
+    }
+    else
+    {
+        <ul>
+            @foreach (var a in _annotations)
+            {
+                <li>@a.Text</li>
+            }
+        </ul>
+    }
+
+<hr />
+
+@if (ActiveParagraph is null)
+{
+    <p class="muted">Select a paragraph to add a comment.</p>
+}
+else if (_isCreating)
+{
+    <AnnotationEditor
+        OnConfirm="CreateAnnotation"
+        OnCancel="CancelCreate" />
+}
+else
+{
+    <button class="add-comment"
+            @onclick="StartCreate">
+        Add comment
+    </button>
+}
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public string StorySlug { get; set; } = "";
+
+    [Parameter, EditorRequired]
+    public string ChapterId { get; set; } = "";
+
+    [Parameter]
+    public Paragraph? ActiveParagraph { get; set; }
+
+    private bool _isCreating;
+    private List<Annotation> _annotations = [];
+
+    protected override void OnParametersSet()
+    {
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        _annotations = Registry
+            .GetByChapter(StorySlug, ChapterId)
+            .ToList();
+    }
+
+    private void StartCreate()
+    {
+        _isCreating = true;
+    }
+
+    private void CancelCreate()
+    {
+        _isCreating = false;
+    }
+
+    private void CreateAnnotation(string text)
+    {
+        if (ActiveParagraph is null)
+            return;
+
+        Registry.Add(new Annotation
+        {
+            Text = text,
+            Location = new AnnotationLocation
+            {
+                StorySlug = StorySlug,
+                ChapterId = ChapterId,
+                ParagraphId = ActiveParagraph.Id
+            }
+        });
+
+        _isCreating = false;
+        Refresh();          // ✅ immediate UI update
+        StateHasChanged();  // ✅ force re-render
+    }
+}

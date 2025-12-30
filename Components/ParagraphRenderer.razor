@@ -1,81 +1,36 @@
+@using SudaTales.Models
 @using SudaTales.Services
+
 @inject AnnotationRegistry Registry
 
-<p>
-@foreach (var segment in Segments)
-{
-    if (segment.Annotation is null)
+<p class="paragraph">
+    @Paragraph.Text
+
+    @if (_annotations.Any())
     {
-        @segment.Text
+        <span class="annotation-indicator">
+            (@_annotations.Count)
+        </span>
     }
-    else
-    {
-        <AnnotatedSpan Annotation="segment.Annotation">
-            @segment.Text
-        </AnnotatedSpan>
-    }
-}
 </p>
 
 @code {
     [Parameter, EditorRequired]
     public Paragraph Paragraph { get; set; } = default!;
 
-    private List<Segment> Segments = [];
+    [Parameter, EditorRequired]
+    public string StorySlug { get; set; } = "";
+
+    [Parameter, EditorRequired]
+    public string ChapterId { get; set; } = "";
+
+    private List<Annotation> _annotations = [];
 
     protected override void OnParametersSet()
     {
-        Segments = BuildSegments();
-    }
-
-    private List<Segment> BuildSegments()
-    {
-        var segments = new List<Segment>();
-
-        if (Paragraph.Annotations.Count == 0)
-        {
-            segments.Add(new Segment { Text = Paragraph.Text });
-            return segments;
-        }
-
-        var index = 0;
-
-        foreach (var ia in Paragraph.Annotations.OrderBy(a => a.Start))
-        {
-            var reg = Registry.Get(ia.AnnotationId);
-            if (reg is null) continue;
-
-            if (ia.Start > index)
-            {
-                segments.Add(new Segment
-                {
-                    Text = Paragraph.Text[index..ia.Start]
-                });
-            }
-
-            segments.Add(new Segment
-            {
-                Text = Paragraph.Text.Substring(ia.Start, ia.Length),
-                Annotation = reg.Annotation
-            });
-
-            index = ia.Start + ia.Length;
-        }
-
-        if (index < Paragraph.Text.Length)
-        {
-            segments.Add(new Segment
-            {
-                Text = Paragraph.Text[index..]
-            });
-        }
-
-        return segments;
-    }
-
-    private sealed class Segment
-    {
-        public string Text { get; init; } = "";
-        public Annotation? Annotation { get; init; }
+        _annotations = Registry
+            .GetByChapter(StorySlug, ChapterId)
+            .Where(a => a.Location.ParagraphId == Paragraph.Id)
+            .ToList();
     }
 }

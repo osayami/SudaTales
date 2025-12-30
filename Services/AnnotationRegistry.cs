@@ -4,24 +4,21 @@ namespace SudaTales.Services;
 
 public sealed class AnnotationRegistry
 {
-    private readonly Dictionary<string, RegisteredAnnotation> _byId = [];
+    private readonly List<Annotation> _annotations = [];
 
-    public IReadOnlyCollection<RegisteredAnnotation> All
-        => _byId.Values;
-
-    public void Register(
-        Annotation annotation,
-        AnnotationLocation location)
+    public void Add(Annotation annotation)
     {
-        var entry = new RegisteredAnnotation
-        {
-            Annotation = annotation,
-            Location = location
-        };
-
-        _byId[entry.Id] = entry;
+        _annotations.Add(annotation);
     }
 
-    public RegisteredAnnotation? Get(string id)
-        => _byId.TryGetValue(id, out var a) ? a : null;
+    public IReadOnlyList<Annotation> GetAll()
+        => _annotations;
+
+    public IEnumerable<Annotation> GetByStory(string storySlug)
+        => _annotations.Where(a => a.Location.StorySlug == storySlug);
+
+    public IEnumerable<Annotation> GetByChapter(string storySlug, string chapterId)
+        => _annotations.Where(a =>
+            a.Location.StorySlug == storySlug &&
+            a.Location.ChapterId == chapterId);
 }

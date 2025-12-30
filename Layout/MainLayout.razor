@@ -1,11 +1,15 @@
 ﻿@namespace SudaTales.Layout
 @inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        @Body
-    </main>
+<div class="app-shell">
+    <header class="top-nav">
+        <NavMenu />
+    </header>
+
+    <div class="body-area">
+
+        <main class="content">
+            @Body
+        </main>
+    </div>
 </div>

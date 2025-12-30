@@ -1,0 +1,36 @@
+@using SudaTales.Models
+
+<div class="story-sidebar-inner">
+    <h3>Chapters</h3>
+
+    <ul class="chapter-list">
+        @foreach (var chapter in Story.Chapters.OrderBy(c => c.Order))
+        {
+            <li>
+                <button
+                    class="chapter-button @(chapter.Id == ActiveChapter.Id ? "active" : "")"
+                    @onclick="() => SelectChapter(chapter)">
+                    @chapter.Title
+                </button>
+            </li>
+        }
+    </ul>
+
+    
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public StoryModel Story { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public ChapterModel ActiveChapter { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public EventCallback<ChapterModel> OnChapterSelected { get; set; }
+
+    private async Task SelectChapter(ChapterModel chapter)
+    {
+        await OnChapterSelected.InvokeAsync(chapter);
+    }
+}

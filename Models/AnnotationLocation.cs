@@ -2,8 +2,17 @@ namespace SudaTales.Models;
 
 public sealed class AnnotationLocation
 {
-    public string PostSlug { get; init; } = "";
+    // Identifies the story (formerly PostSlug)
+    public string StorySlug { get; init; } = "";
+
+    // Identifies the chapter within the story
+    public string ChapterId { get; init; } = "";
+
+    // Identifies the paragraph
     public string ParagraphId { get; init; } = "";
-    public int Start { get; init; }
-    public int Length { get; init; }
+
+    // Optional: character offsets inside the paragraph
+    // (safe to keep even if unused for now)
+    public int? StartOffset { get; init; }
+    public int? EndOffset { get; init; }
 }
