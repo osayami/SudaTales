@@ -1,0 +1,49 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #111;
+}
+
+.app-nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #111;
+}
+
+.app-nav a {
+  color: #eee;
+  text-decoration: none;
+}
+
+.app-nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.app-footer {
+  padding: 1rem;
+  text-align: center;
+  background: #f2f2f2;
+  margin-top: 4rem;
+  font-size: 0.9rem;
+}
+
+article {
+  margin-top: 2rem;
+}
+
+article h1 {
+  margin-bottom: 2rem;
+}
+
+paragraph-block {
+  display: block;
+}

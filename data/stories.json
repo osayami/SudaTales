@@ -1,0 +1,23 @@
+{
+  "stories": [
+    {
+      "id": "peacock-crow",
+      "title": "The Peacock and the Crow",
+      "language": "en",
+      "paragraphs": [
+        {
+          "pid": "p-001",
+          "text": "The crow stood at the edge of the clearing, watching the peacock unfold its feathers as if the world itself were an audience."
+        },
+        {
+          "pid": "p-002",
+          "text": "No one noticed the silence that followed. No one except the crow."
+        },
+        {
+          "pid": "p-003",
+          "text": "In the stories told later, the silence would matter more than the feathers."
+        }
+      ]
+    }
+  ]
+}
